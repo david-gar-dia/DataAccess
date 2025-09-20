@@ -18,6 +18,7 @@ namespace MainForm.DATA_ACCESS
         private string filename;
 
         //Constructor
+        public DAOImplCSV() : this("raw_titles.csv"){}
         public DAOImplCSV(string filename)
         {
             this.filename = filename;
@@ -29,8 +30,8 @@ namespace MainForm.DATA_ACCESS
             MatchCollection fields, curGenres;
             StringBuilder sb;
             string[] genresArray;
-            string line, curIndex, curId, curTitle, curGenresString;
-            int result = 0;
+            string line;
+            int result = 0, indexGenre;
 
             using(StreamReader sr = new StreamReader(filename))
             {
@@ -41,27 +42,29 @@ namespace MainForm.DATA_ACCESS
                     line = sr.ReadLine();
                     while(line != null)
                     {
+                        indexGenre = 0;
                         fields = Regex.Matches(line, @"""[^""]*""|[^,]+");
 
-                        curGenres = Regex.Matches(fields[8].Value, @"'[^']*'");
+                        curGenres = Regex.Matches(fields[7].Value, @"'[^']*'");
                         genresArray = new string[curGenres.Count];
+
+                        foreach(Match genreMatch in curGenres)
+                        {
+                            genresArray[indexGenre] = genreMatch.Value;
+                            indexGenre++;
+                        }
 
                         if(genresArray.Contains("'"+genre+"'"))
                         {
                             sb = new StringBuilder();
 
-                            curIndex = fields[0].Value;
-                            curId = fields[1].Value;
-                            curTitle = fields[2].Value;
-                            curGenresString = fields[8].Value;
-
-                            sb.Append(curIndex.Substring(0, curIndex.Length - 1));
+                            sb.Append(fields[0].Value);
                             sb.Append(";");
-                            sb.Append(curId.Substring(0, curId.Length - 1));
+                            sb.Append(fields[1].Value);
                             sb.Append(";");
-                            sb.Append(curTitle.Substring(0, curTitle.Length - 1));
+                            sb.Append(fields[2].Value);
                             sb.Append(";");
-                            sb.Append(curGenresString.Substring(0, curGenresString.Length - 1));
+                            sb.Append(fields[7].Value);
 
                             sw.WriteLine(sb.ToString());
                             result++;
@@ -122,7 +125,7 @@ namespace MainForm.DATA_ACCESS
                 while (line != null && !found)
                 {
                     fields = Regex.Matches(line, @"""[^""]*""|[^,]+");
-                    curId = Convert.ToInt32(fields[0].Value.Substring(2));
+                    curId = Convert.ToInt32(fields[1].Value.Substring(2));
 
                     if (curId == id)
                         found = true;

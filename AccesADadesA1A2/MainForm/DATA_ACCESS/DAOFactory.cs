@@ -13,15 +13,18 @@ namespace MainForm.DATA_ACCESS
         //Constructors
 
         //Métodes
-        static IDAO createDAOImpl(EnumDAOType daoType, string connection)
+        static public IDAO CreateDAOImpl(EnumDAOType daoType, string connection = "")
         {
             IDAO result;
 
             switch(daoType)
             {
                 case EnumDAOType.CSV:
-                    result = new DAOImplCSV(connection);
-                    break;
+                    if(connection != "")
+                        result = new DAOImplCSV(connection);
+                    else
+                        result = new DAOImplCSV();
+                        break;
                 default:
                     throw new ArgumentException("The given DAO Type was not withing the valid parameters");
             }

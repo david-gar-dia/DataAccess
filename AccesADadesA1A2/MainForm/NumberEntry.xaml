@@ -1,0 +1,16 @@
+﻿<Window x:Name="wnd_numberEntry" x:Class="MainForm.NumberEntry"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainForm"
+        mc:Ignorable="d"
+        Title="NumberEntry" Height="141" Width="341">
+    <Grid x:Name="grd_numberEntry">
+        <Label x:Name="main_lbl_numberEntry" Content="Enter a number:" HorizontalAlignment="Left" Margin="50,36,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="number_txtbox_numberEntry" HorizontalAlignment="Left" Margin="50,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="accept_btn_numberEntry" Content="Accept" HorizontalAlignment="Left" Margin="179,66,0,0" VerticalAlignment="Top" Height="19" Width="48" Click="accept_btn_numberEntry_Click"/>
+        <Button x:Name="cancel_btn_numberEntry" Content="Cancel" HorizontalAlignment="Left" Margin="248,67,0,0" VerticalAlignment="Top" Height="19" Width="48" Click="cancel_btn_numberEntry_Click"/>
+
+    </Grid>
+</Window>

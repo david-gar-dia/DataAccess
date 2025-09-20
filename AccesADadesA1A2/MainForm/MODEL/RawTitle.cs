@@ -9,11 +9,11 @@ using System.Windows.Shapes;
 
 namespace MainForm.MODEL
 {
-    internal class RawTitle : IComparable
+    class RawTitle : IComparable
     {
         //Atributs
         private int index;
-        private int id;
+        private string id;
         private string title;
         private EnumTitleType type;
         private int release_year;
@@ -25,19 +25,34 @@ namespace MainForm.MODEL
         public RawTitle(string csv)
         {
             MatchCollection fields;
+            string auxString;
 
-            fields = Regex.Matches(csv, @"(?: ""[^""] * "" | [^,] *)(?:,|$)";
+            fields = Regex.Matches(csv, @"(""[^""]*""|[^,]*)(,|$)");
 
-            index = Convert.ToInt32(fields[0].Value);
-            id = Convert.ToInt32(fields[1].Value);
-            title = fields[2].Value;
-            type = (EnumTitleType) Enum.Parse(typeof(EnumTitleType), fields[3].Value);
-            release_year = Convert.ToInt32(fields[4].Value);
-            seasons = Convert.ToDouble(fields[9].Value);
-            imdb_score = Convert.ToDouble(fields[11].Value);
-            imdb_votes = Convert.ToDouble(fields[12].Value);
+            auxString = fields[0].Value;
+            index = Convert.ToInt32(auxString.Substring(0, auxString.Length - 1));
+            auxString = fields[1].Value;
+            id = auxString.Substring(0, auxString.Length - 1);
+            auxString = fields[2].Value;
+            title = auxString.Substring(0, auxString.Length - 1);
+            auxString = fields[3].Value;
+            type = (EnumTitleType)Enum.Parse(typeof(EnumTitleType), fields[3].Value.Substring(0, auxString.Length - 1));
+            auxString = fields[4].Value;
+            release_year = Convert.ToInt32(auxString.Substring(0, auxString.Length - 1));
+            
+            auxString = fields[9].Value;
+            if(auxString != ",")
+                seasons = Convert.ToDouble(auxString.Substring(0, auxString.Length - 1));
+
+            auxString = fields[11].Value;
+            if (auxString != ",")
+                imdb_score = Convert.ToDouble(auxString.Substring(0, auxString.Length - 1));
+
+            auxString = fields[12].Value;
+            if (auxString != ",")
+                imdb_votes = Convert.ToDouble(auxString.Substring(0, auxString.Length - 1));
         }
-        public RawTitle(int index, int id, string title, EnumTitleType type, int release_year, double seasons, double imdb_scores, double imdb_votes)
+        public RawTitle(int index, string id, string title, EnumTitleType type, int release_year, double seasons, double imdb_scores, double imdb_votes)
         {
             this.index = index;
             this.id = id;
@@ -64,6 +79,10 @@ namespace MainForm.MODEL
             }
 
             return result;
+        }
+        public override string ToString()
+        {
+            return $"{index},{id},{title},{type},{release_year},{seasons},{imdb_score},{imdb_votes}";
         }
     }
 
