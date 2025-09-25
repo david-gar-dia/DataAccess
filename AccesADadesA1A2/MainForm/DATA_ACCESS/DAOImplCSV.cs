@@ -184,5 +184,78 @@ namespace MainForm.DATA_ACCESS
 
             return result;
         }
+        public void PreMerge(RawTitle[] titles, string outputFileName)
+        {
+            Array.Sort(titles);
+            using(StreamWriter sw = new StreamWriter(outputFileName))
+            {
+                foreach (RawTitle title in titles)
+                    sw.WriteLine(title);
+            }
+        }
+
+        public int Merge(string inputFileName1, string inputFileName2, string outputFileName)
+        {
+            StreamReader sr1 = new StreamReader(inputFileName1);
+            StreamReader sr2 = new StreamReader(inputFileName2);
+            RawTitle curTitle1, curTitle2;
+            string line1, line2;
+            int curCompareResult, result = 0;
+
+            using(StreamWriter sw = new StreamWriter(outputFileName))
+            {
+                line1 = sr1.ReadLine();
+                line2 = sr2.ReadLine();
+                
+                while(line1 != null && line2 != null)
+                {
+                    curTitle1 = new RawTitle(line1);
+                    curTitle2 = new RawTitle(line2);
+
+                    curCompareResult = curTitle1.CompareTo(curTitle2);
+
+                    if(curCompareResult == 0)
+                    {
+                        sw.WriteLine(line1);
+                        sw.WriteLine(line2);
+
+                        line1 = sr1.ReadLine();
+                        line2 = sr2.ReadLine();
+
+                        result += 2;
+                    }
+                    else if(curCompareResult < 0)
+                    {
+                        sw.WriteLine(line1);
+                        line1 = sr1.ReadLine();
+
+                        result++;
+                    }
+                    else
+                    {
+                        sw.WriteLine(line2);
+                        line2 = sr2.ReadLine();
+
+                        result++;
+                    }
+                }
+
+                while(line1 != null)
+                {
+                    sw.WriteLine(line1);
+                    line1 = sr1.ReadLine();
+
+                    result++;
+                }
+
+                while(line2 != null)
+                {
+                    sw.WriteLine(line2);
+                    line2 = sr2.ReadLine();
+
+                    result++;
+                }
+            }
+        }
     }
 }

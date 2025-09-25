@@ -75,7 +75,26 @@ namespace MainForm.MODEL
             else
             {
                 objAsTitle = obj as RawTitle;
-                result = id.CompareTo(objAsTitle.id);
+                if (imdb_score.Equals(objAsTitle.imdb_score))
+                    result = index.CompareTo(objAsTitle.index);
+                else
+                    result = imdb_score.CompareTo(objAsTitle.imdb_score);
+            }
+
+            return result;
+        }
+        public override bool Equals(object? obj)
+        {
+            RawTitle objAsTitle;
+            bool result = true;
+
+            if (obj == null || obj is not RawTitle)
+                result = false;
+            else
+            {
+                objAsTitle = obj as RawTitle;
+                if(!id.Equals(objAsTitle.id) || !title.Equals(objAsTitle.title))
+                    result = false;
             }
 
             return result;

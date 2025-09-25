@@ -13,5 +13,7 @@ namespace MainForm.DATA_ACCESS
         public RawTitle SelectByIndex(int index);
         public RawTitle SelectById(int id);
         public RawTitle[] ReadTitles(int index, int length);
+        public void PreMerge(RawTitle[] titles, string outputFileName);
+        public int Merge(string inputFileName1, string inputFileName2, );
     }
 }

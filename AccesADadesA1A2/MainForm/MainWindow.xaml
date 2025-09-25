@@ -15,8 +15,8 @@
         <Button x:Name="id_btn_mainWindow" Content="Search by Id" HorizontalAlignment="Left" Margin="557,161,0,0" VerticalAlignment="Top" Height="56" Width="122" Click="id_btn_mainWindow_Click"/>
         <Button x:Name="bulkIndex_btn_mainWindow" Content="Bulk Search by Index" HorizontalAlignment="Left" Margin="118,283,0,0" VerticalAlignment="Top" Height="56" Width="122" Click="bulkIndex_btn_mainWindow_Click"/>
         <Label x:Name="main_lbl_mainWindow" Content="Choose an option to search by:" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" FontSize="24" Height="42" Width="340"/>
-        <Button x:Name="outputTitles_btn_mainWindow" Content="Output Titles" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" Height="56" Width="122" IsEnabled="False"/>
-        <Button x:Name="mergeFiles_btn_mainWindow" Content="Merge Files" HorizontalAlignment="Left" Margin="557,283,0,0" VerticalAlignment="Top" Height="56" Width="122" IsEnabled="False"/>
+        <Button x:Name="outputTitles_btn_mainWindow" Content="Sort Titles" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" Height="56" Width="122"/>
+        <Button x:Name="mergeFiles_btn_mainWindow" Content="Merge Files" HorizontalAlignment="Left" Margin="557,283,0,0" VerticalAlignment="Top" Height="56" Width="122"/>
 
     </Grid>
 </Window>
