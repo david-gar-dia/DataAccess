@@ -186,6 +186,9 @@ namespace MainForm.DATA_ACCESS
         }
         public void PreMerge(RawTitle[] titles, string outputFileName)
         {
+            if (outputFileName == "")
+                outputFileName = $"preMerge_{titles.Count()}.txt";
+
             Array.Sort(titles);
             using(StreamWriter sw = new StreamWriter(outputFileName))
             {
@@ -202,7 +205,10 @@ namespace MainForm.DATA_ACCESS
             string line1, line2;
             int curCompareResult, result = 0;
 
-            using(StreamWriter sw = new StreamWriter(outputFileName))
+            if (outputFileName == "")
+                outputFileName = "MergeResult.txt";
+
+            using (StreamWriter sw = new StreamWriter(outputFileName))
             {
                 line1 = sr1.ReadLine();
                 line2 = sr2.ReadLine();
@@ -255,6 +261,8 @@ namespace MainForm.DATA_ACCESS
 
                     result++;
                 }
+
+                return result;
             }
         }
     }

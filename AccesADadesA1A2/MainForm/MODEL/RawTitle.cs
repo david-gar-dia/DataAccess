@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Printing;
 using System.Text;
@@ -23,7 +24,7 @@ namespace MainForm.MODEL
 
         //Constructors
         public RawTitle(string csv)
-        {
+        {            
             MatchCollection fields;
             string auxString;
 
@@ -39,18 +40,33 @@ namespace MainForm.MODEL
             type = (EnumTitleType)Enum.Parse(typeof(EnumTitleType), fields[3].Value.Substring(0, auxString.Length - 1));
             auxString = fields[4].Value;
             release_year = Convert.ToInt32(auxString.Substring(0, auxString.Length - 1));
-            
-            auxString = fields[9].Value;
-            if(auxString != ",")
+
+            if (fields.Count > 9)
+            {
+                auxString = fields[9].Value;
+                if (auxString != ",")
+                    seasons = Convert.ToDouble(auxString.Substring(0, auxString.Length - 1));
+
+                auxString = fields[11].Value;
+                if (auxString != ",")
+                    imdb_score = Convert.ToDouble(auxString.Substring(0, auxString.Length - 1));
+
+                auxString = fields[12].Value;
+                if (auxString != "")
+                    imdb_votes = Convert.ToDouble(auxString);
+            }
+            else
+            {
+                auxString = fields[5].Value;
                 seasons = Convert.ToDouble(auxString.Substring(0, auxString.Length - 1));
 
-            auxString = fields[11].Value;
-            if (auxString != ",")
+                auxString = fields[6].Value;
                 imdb_score = Convert.ToDouble(auxString.Substring(0, auxString.Length - 1));
 
-            auxString = fields[12].Value;
-            if (auxString != ",")
-                imdb_votes = Convert.ToDouble(auxString.Substring(0, auxString.Length - 1));
+                auxString = fields[7].Value;
+                imdb_votes = Convert.ToDouble(auxString);
+            }
+
         }
         public RawTitle(int index, string id, string title, EnumTitleType type, int release_year, double seasons, double imdb_scores, double imdb_votes)
         {

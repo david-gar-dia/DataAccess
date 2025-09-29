@@ -1,4 +1,5 @@
 ﻿using MainForm.DATA_ACCESS;
+using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,9 @@ namespace MainForm
         {
             InitializeComponent();
             dAO = DAOFactory.CreateDAOImpl(EnumDAOType.CSV);
+
+            CultureInfo culture = new CultureInfo("en-US");
+            CultureInfo.CurrentCulture = culture;
         }
 
         //Métodes
@@ -58,6 +62,22 @@ namespace MainForm
 
             bulkTitleEntry.Owner = this;
             bulkTitleEntry.ShowDialog();
+        }
+
+        private void outputTitles_btn_mainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            PreMergeEntry preMergeEntry = new PreMergeEntry(dAO);
+
+            preMergeEntry.Owner = this;
+            preMergeEntry.ShowDialog();
+        }
+
+        private void mergeFiles_btn_mainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            MergeEntry mergeEntry = new MergeEntry(dAO);
+
+            mergeEntry.Owner = this;
+            mergeEntry.ShowDialog();
         }
     }
 }

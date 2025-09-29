@@ -1,0 +1,21 @@
+﻿<Window x:Name="wnd_preMergeEntry" x:Class="MainForm.PreMergeEntry"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainForm"
+        mc:Ignorable="d"
+        Title="PreMerge Entry" Height="207" Width="341">
+    <Grid x:Name="grd_preMergeEntry">
+        <Label x:Name="from_lbl_preMergeEntry" Content="From title:" HorizontalAlignment="Left" Margin="40,33,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="startPos_txtbox_preMergeEntry" HorizontalAlignment="Left" Margin="109,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
+        <Button x:Name="accept_btn_preMergeEntry" Content="Accept" HorizontalAlignment="Left" Margin="169,63,0,0" VerticalAlignment="Top" Height="19" Width="48" Click="accept_btn_preMergeEntry_Click" />
+        <Button x:Name="cancel_btn_preMergeEntry" Content="Cancel" HorizontalAlignment="Left" Margin="238,64,0,0" VerticalAlignment="Top" Height="19" Width="48" Click="cancel_btn_preMergeEntry_Click" />
+        <Label x:Name="to_lbl_preMergeEntry" Content="to title:" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="finalPos_txtbox_preMergeEntry" HorizontalAlignment="Left" Margin="92,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
+        <Label x:Name="outputFile_lbl_preMergeEntry" Content="Output:" HorizontalAlignment="Left" Margin="41,100,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="outputFile_txtbox_preMergeEntry" HorizontalAlignment="Left" Margin="92,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Height="18"/>
+        <Button x:Name="outputFile_btn_preMergeEntry" Content="File..." HorizontalAlignment="Left" Margin="253,103,0,0" VerticalAlignment="Top" Width="43" Click="outputFile_btn_preMergeEntry_Click"/>
+
+    </Grid>
+</Window>
