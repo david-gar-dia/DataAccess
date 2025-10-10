@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ex02
 {
+    /// <summary>
+    /// Clase que hace enumerable un fichero a través de su filename
+    /// </summary>
     internal class StreamReaderEnumerable : IEnumerable<string>
     {
         // Atributs
@@ -19,11 +22,19 @@ namespace ex02
             this.fileName = fileName;
         }
 
+        /// <summary>
+        /// Enumera cada linea de un fichero utilizando la clase MyStreamReaderEnumerator
+        /// </summary>
+        /// <returns>El IEnumerator del fichero</returns>
         public IEnumerator<string> GetEnumerator()
         {
             return new MyStreamReaderEnumerator(fileName);
         }
 
+        /// <summary>
+        /// Enumera cada linea de un fichero utilizando la clase MyStreamReaderEnumerator
+        /// </summary>
+        /// <returns>El IEnumerator del fichero</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -31,6 +42,9 @@ namespace ex02
 
 
         // Clases
+        /// <summary>
+        /// Enumera todos los elementos de un fichero de texto
+        /// </summary>
         internal class MyStreamReaderEnumerator : IEnumerator<string>
         {
             // Atributs
@@ -48,6 +62,12 @@ namespace ex02
             }
 
             // Métodes
+            /// <summary>
+            /// Avanza al siguiente elemento en la enumeración de lineas del fichero mediante el uso
+            /// del atribute de tipo StreamReader
+            /// </summary>
+            /// <returns>Devuelve true si se ha podido avanzar a un siguiente elemento o false si no hay
+            /// más elementos a los que avanzar</returns>
             public bool MoveNext()
             {
                 bool result = true;
@@ -59,11 +79,18 @@ namespace ex02
 
                 return result;
             }
+
+            /// <summary>
+            /// Libera los recursos utilizados para enumerar el fichero
+            /// </summary>
             public void Dispose()
             {
                 sR.Close();
             }
 
+            /// <summary>
+            /// Devuelve los valores de la clase a su estado inicial para enumerar los elementos de nuevo
+            /// </summary>
             public void Reset()
             {
                 sR.DiscardBufferedData();

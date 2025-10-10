@@ -2,6 +2,11 @@
 {
     internal class Program
     {
+        /// <summary>
+        /// Muestra formateado en texto una lista de strings dada debajo de un encabezado también dado
+        /// </summary>
+        /// <param name="what2Show">El encabezado bajo el que se mostrará</param>
+        /// <param name="showable">La lista que se mostrará</param>
         static void Mostrar(string what2Show, IEnumerable<string> showable)
         {
             Console.WriteLine($"{what2Show}:");
@@ -20,9 +25,18 @@
             IEnumerable<string> caseD = sre.OrderBy(n => n);
             IEnumerable<string> caseE = sre.Skip(2).Take(3).Select(n => n.ToLower());
             IEnumerable<string> caseF = sre.Select(n => n.Substring(0, n.IndexOf(" ")));
+            // Consulta LINQ que recoge todas las líneas y las muestra en leetspeak
             IEnumerable<string> caseG = sre.Select(n => n.Replace("E", "3").Replace("A", "4").Replace("I", "1"));
+
+            // Consulta LINQ que muestra solo la primera y última letra de cada linea sin repetidos
             IEnumerable<string> caseH = sre.Select(n => n.Substring(0, 1) + n.Substring(n.IndexOf(" ") - 1)).Distinct();
+
+            // Consulta LINQ que comprueba si alguna línea tiene una letra A en la posición que resulta del ratio
+            // entero entre longitud y apariciones de la letra A
             bool caseI = sre.Any(n => n[(n.Length / n.Count(n => n == 'A'))] == 'A');
+
+            // Consulta LINQ que de entre todas las líneas con más de dos A's, elimina en conjunto entre el inicio y el final
+            // de la linea y de manera equitativa el ratio entero entre longitud de linea y apariciones de la letra A
             IEnumerable<string> caseJ = sre.Where(n => n.Count(n => n == 'A') > 2).Select(n => n.Substring(n.Length / n.Count(n => n == 'A') / 2, n.Length - n.Length / n.Count(n => n == 'A')));
 
             Console.WriteLine($"a) Quantes linies té el fitxer\n{caseA}\n");

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ex01
 {
+    /// <summary>
+    /// Clase que hace enumerable un fichero a través de su filename
+    /// </summary>
     public class StreamReaderEnumerable : IEnumerable<string>
     {
         // Atributs
@@ -19,6 +22,11 @@ namespace ex01
         }
 
         // Métodes
+
+        /// <summary>
+        /// Enumera cada linea de un fichero utilizando un objeto StreamReader
+        /// </summary>
+        /// <returns>El IEnumerator del fichero</returns>
         public IEnumerator<string> GetEnumerator()
         {
             StreamReader sr = new StreamReader(fileName);
@@ -29,6 +37,10 @@ namespace ex01
             sr.Close();
         }
 
+        /// <summary>
+        /// Enumera cada linea de un fichero utilizando un objeto StreamReader
+        /// </summary>
+        /// <returns>El IEnumerator del fichero</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
