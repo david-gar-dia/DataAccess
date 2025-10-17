@@ -20,9 +20,13 @@ namespace ex01.MODEL
         public string Dni{ get{ return dni; } }
         public double Sous{ get { return sous; } }
 
+        /// <summary>
+        /// Muestra el objeto persona en un formato legible
+        /// </summary>
+        /// <returns>El string legible</returns>
         public override string ToString()
         {
-            return $"{dni} {sous}";
+            return $"{dni} - {sous}";
         }
     }
 }
